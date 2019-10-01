@@ -23,7 +23,7 @@ public class ShipMovement : MonoBehaviour
     void Update()
     {
         this.direction = this.transform.forward * Input.GetAxis("Vertical");
-        this.eulerRotation.x = Input.GetAxis("Horizontal") * -2;
+        this.eulerRotation.y = Input.GetAxis("Horizontal") * 2;
 
         if (Input.GetKey(KeyCode.Space))
             this.direction.y = 1;
