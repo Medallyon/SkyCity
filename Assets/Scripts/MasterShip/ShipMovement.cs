@@ -8,6 +8,7 @@ public class ShipMovement : MonoBehaviour
 
     private float acceleration;
     private Vector3 direction;
+    private Vector3 eulerRotation = new Vector3();
 
     private Rigidbody rb;
    
@@ -22,23 +23,24 @@ public class ShipMovement : MonoBehaviour
     void Update()
     {
         this.direction = this.transform.forward * Input.GetAxis("Vertical");
+        this.eulerRotation.x = Input.GetAxis("Horizontal") * -2;
 
         if (Input.GetKey(KeyCode.Space))
             this.direction.y = 1;
-        else if (Input.GetKey(KeyCode.LeftShift))
+        else if (Input.GetKey(KeyCode.LeftControl))
             this.direction.y = -1;
         else
             this.direction.y = 0;
-
-        // todo: insert rotation logic
     }
 
     void FixedUpdate()
     {
+        // Move Ship
         var force = this.direction * this.acceleration;
         this.rb.AddForce(force * Time.deltaTime);
-        //this.rb.MoveRotation();
 
-        Debug.Log(this.rb.velocity);
+        // Rotate Ship
+        var deltaRotation = Quaternion.Euler(this.eulerRotation * Time.deltaTime);
+        this.rb.MoveRotation(this.rb.rotation * deltaRotation);
     }
 }
