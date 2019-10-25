@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class ShipMovement : MonoBehaviour
 {
-    public float Speed = 1;
+    public float Speed = 1f;
+    public float RotationSpeed = 1f;
 
     private float acceleration;
     private Vector3 direction;
@@ -23,7 +24,7 @@ public class ShipMovement : MonoBehaviour
     void Update()
     {
         this.direction = this.transform.forward * Input.GetAxis("Vertical");
-        this.eulerRotation.y = Input.GetAxis("Horizontal") * 2;
+        this.eulerRotation.y = Input.GetAxis("Horizontal") * this.RotationSpeed * 2f;
 
         if (Input.GetKey(KeyCode.Space))
             this.direction.y = 1;
