@@ -154,6 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 1
+  RotationSpeed: 2
 --- !u!64 &118093425
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -272,6 +273,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9cded920e8a62e41a69f675fdfb45a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BuildingPrefabs:
+  - {fileID: 5796304052960925671, guid: cf93a32a22a646a49ab5f26f57edfc17, type: 3}
+  CityConstraints: {x: 100, y: 100}
+  Padding: 20
 --- !u!4 &217295156
 Transform:
   m_ObjectHideFlags: 0
@@ -280,7 +285,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 217295154}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -495,7 +500,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1309069309}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.38388, y: 0.59014, z: -0.021562}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 29.707346, y: 29.707333, z: 29.707333}
   m_Children: []
   m_Father: {fileID: 0}
@@ -586,7 +591,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1526980365}
   m_LocalRotation: {x: 0.7064338, y: 0.47771442, z: 0.030843567, w: 0.5213338}
-  m_LocalPosition: {x: 0, y: 3.43, z: 3.789}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
