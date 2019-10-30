@@ -31,7 +31,7 @@ public class ShipMovement : MonoBehaviour
         this.direction += this.transform.up * Input.GetAxis("VerticalMovement");
 
         // Rotation
-        this.eulerRotation.y = Input.GetAxis("Rotation") * this.RotationSpeed * 2f;
+        this.eulerRotation.y = Mathf.Lerp(this.eulerRotation.y, Input.GetAxis("Rotation") * this.RotationSpeed * 2f, Time.deltaTime);
     }
 
     void FixedUpdate()
