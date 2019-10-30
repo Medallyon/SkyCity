@@ -154,7 +154,7 @@ Light:
   serializedVersion: 9
   m_Type: 1
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0.65
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -164,7 +164,7 @@ Light:
     m_Resolution: -1
     m_CustomResolution: -1
     m_Strength: 1
-    m_Bias: 0.05
+    m_Bias: 0.75
     m_NormalBias: 0.4
     m_NearPlane: 0.2
     m_CullingMatrixOverride:
@@ -406,6 +406,16 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 112
       objectReference: {fileID: 0}
+    - target: {fileID: 654339804459327263, guid: a84e32077ab6f264ea018f92b3fde8bd,
+        type: 3}
+      propertyPath: m_Drag
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 654339804459327263, guid: a84e32077ab6f264ea018f92b3fde8bd,
+        type: 3}
+      propertyPath: m_AngularDrag
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a84e32077ab6f264ea018f92b3fde8bd, type: 3}
 --- !u!1 &1844961014
@@ -452,6 +462,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BuildingPrefabs:
-  - {fileID: 5438200413849671187, guid: d7f48fd2d750e5d42806fe95cc7ef8f4, type: 3}
+  - {fileID: 8124789972319162595, guid: 9083a2236403fcd4a981e376406b5907, type: 3}
   CityConstraints: {x: 10, y: 10}
   Padding: 150
