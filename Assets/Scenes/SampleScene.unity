@@ -463,5 +463,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BuildingPrefabs:
   - {fileID: 8124789972319162595, guid: 9083a2236403fcd4a981e376406b5907, type: 3}
-  CityConstraints: {x: 10, y: 10}
-  Padding: 150
+  CityConstraints: {x: 50, y: 50}
+  Padding: 175

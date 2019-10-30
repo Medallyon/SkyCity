@@ -23,27 +23,15 @@ public class ShipMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        this.direction = this.transform.forward * Input.GetAxis("Vertical");
-        //this.direction = this.direction + (this.transform.right * Input.GetAxis("Horizontal"));
+        // Forward / Backward
+        this.direction = this.transform.forward * Input.GetAxis("ForwardMovement");
+        // Port / Starboard
+        this.direction += this.transform.right * Input.GetAxis("SideMovement");
+        // Up / Down
+        this.direction += this.transform.up * Input.GetAxis("VerticalMovement");
 
-        var horizontalAxis = 0;
-        if (Input.GetKey(KeyCode.E))
-            horizontalAxis = 1;
-        else if (Input.GetKey(KeyCode.Q))
-            horizontalAxis = -1;
-        else
-            horizontalAxis = 0;
-
-        this.direction = this.direction + (this.transform.right * horizontalAxis);
-
-        this.eulerRotation.y = Input.GetAxis("Horizontal") * this.RotationSpeed * 2f;
-
-        if (Input.GetKey(KeyCode.Space))
-            this.direction.y = 1;
-        else if (Input.GetKey(KeyCode.LeftControl))
-            this.direction.y = -1;
-        else
-            this.direction.y = 0;
+        // Rotation
+        this.eulerRotation.y = Input.GetAxis("Rotation") * this.RotationSpeed * 2f;
     }
 
     void FixedUpdate()
