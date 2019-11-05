@@ -23,11 +23,13 @@ public class CityGenerator : MonoBehaviour
         {
             for (int j = 0; j < this.CityConstraints.y; j++)
             {
-                Vector3 spawnPosition = startingPosition - new Vector3(this.Padding * i, 0, this.Padding * j);
+                Vector3 spawnPosition = startingPosition - new Vector3(this.Padding * i + (Random.Range(-(this.Padding), this.Padding) / 8), 0, this.Padding * j + (Random.Range(-(this.Padding), this.Padding) / 8));
+
+                // Don't spawn a building in the center of the grid (player starting position)
                 if (i == this.CityConstraints.x / 2 && j == this.CityConstraints.y / 2)
                     continue;
 
-                Instantiate(this.BuildingPrefabs[Random.Range(0, this.BuildingPrefabs.Length)], spawnPosition, new Quaternion());
+                Instantiate(this.BuildingPrefabs[Random.Range(0, this.BuildingPrefabs.Length)], spawnPosition, new Quaternion(0, Random.Range(0, 3) * 90, 0, 0));
             }
         }
     }
