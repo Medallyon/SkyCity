@@ -338,41 +338,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4891293108272027185, guid: a84e32077ab6f264ea018f92b3fde8bd,
         type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4891293108272027185, guid: a84e32077ab6f264ea018f92b3fde8bd,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4891293108272027185, guid: a84e32077ab6f264ea018f92b3fde8bd,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4891293108272027185, guid: a84e32077ab6f264ea018f92b3fde8bd,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4891293108272027185, guid: a84e32077ab6f264ea018f92b3fde8bd,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4891293108272027185, guid: a84e32077ab6f264ea018f92b3fde8bd,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4891293108272027185, guid: a84e32077ab6f264ea018f92b3fde8bd,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4891293108272027185, guid: a84e32077ab6f264ea018f92b3fde8bd,
-        type: 3}
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
@@ -391,30 +356,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2821867956735896993, guid: a84e32077ab6f264ea018f92b3fde8bd,
+    - target: {fileID: 3200006638796537448, guid: a84e32077ab6f264ea018f92b3fde8bd,
         type: 3}
-      propertyPath: m_Convex
-      value: 1
+      propertyPath: RotationSpeed
+      value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 654339804459327263, guid: a84e32077ab6f264ea018f92b3fde8bd,
+    - target: {fileID: 3200006638796537448, guid: a84e32077ab6f264ea018f92b3fde8bd,
         type: 3}
-      propertyPath: m_IsKinematic
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 654339804459327263, guid: a84e32077ab6f264ea018f92b3fde8bd,
-        type: 3}
-      propertyPath: m_Constraints
-      value: 112
-      objectReference: {fileID: 0}
-    - target: {fileID: 654339804459327263, guid: a84e32077ab6f264ea018f92b3fde8bd,
-        type: 3}
-      propertyPath: m_Drag
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 654339804459327263, guid: a84e32077ab6f264ea018f92b3fde8bd,
-        type: 3}
-      propertyPath: m_AngularDrag
-      value: 0.2
+      propertyPath: Speed
+      value: 250
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a84e32077ab6f264ea018f92b3fde8bd, type: 3}
@@ -463,5 +413,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BuildingPrefabs:
   - {fileID: 8124789972319162595, guid: 9083a2236403fcd4a981e376406b5907, type: 3}
-  CityConstraints: {x: 50, y: 50}
+  CityConstraints: {x: 100, y: 100}
   Padding: 175

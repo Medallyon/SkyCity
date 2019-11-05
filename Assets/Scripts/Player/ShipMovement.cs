@@ -4,19 +4,20 @@ using UnityEngine;
 
 public class ShipMovement : MonoBehaviour
 {
-    public float Speed = 1f;
-    public float RotationSpeed = 1f;
+    public float Speed = 10f;
+    public float TopSpeed = 1000f;
+    public float RotationSpeed = 5f;
 
     private float acceleration;
+    private Rigidbody rb;
+
     private Vector3 direction;
     private Vector3 eulerRotation = new Vector3();
-
-    private Rigidbody rb;
    
     // Start is called before the first frame update
     void Start()
     {
-        this.acceleration = this.Speed * 10;
+        this.acceleration = this.Speed;
         this.rb = this.GetComponent<Rigidbody>();
     }
 
@@ -27,10 +28,13 @@ public class ShipMovement : MonoBehaviour
         this.direction = this.transform.forward * Input.GetAxis("ForwardMovement");
         // Port / Starboard
         this.direction += this.transform.right * Input.GetAxis("SideMovement");
-        // Up / Down
-        this.direction += this.transform.up * Input.GetAxis("VerticalMovement");
+        this.direction.y = 0;
 
-        // Rotation
+        // Boost the movement speed up to the Top Speed
+        if (Input.GetButton("Boost"))
+            this.acceleration = Mathf.Lerp(this.acceleration, this.TopSpeed, Time.deltaTime);
+
+        // Rotation Lerp
         this.eulerRotation.y = Mathf.Lerp(this.eulerRotation.y, Input.GetAxis("Rotation") * this.RotationSpeed * 2f, Time.deltaTime);
     }
 
@@ -38,7 +42,7 @@ public class ShipMovement : MonoBehaviour
     {
         // Move Ship
         var force = this.direction * this.acceleration;
-        this.rb.AddForce(force * Time.deltaTime);
+        this.rb.AddForce(force * Time.deltaTime * (Input.GetButton("Boost") ? 3f : 1f), ForceMode.Acceleration);
 
         // Rotate Ship
         var deltaRotation = Quaternion.Euler(this.eulerRotation * Time.deltaTime);
