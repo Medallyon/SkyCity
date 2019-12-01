@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class CityGenerator : MonoBehaviour
 {
@@ -8,8 +9,18 @@ public class CityGenerator : MonoBehaviour
     public Vector2 CityConstraints = new Vector2(10, 10);
     public float Padding = 20f;
 
+    public GameObject NavMesh;
+
     // Start is called before the first frame update
     void Start()
+    {
+        GenerateScrapers();
+
+        this.NavMesh.GetComponent<NavMeshSurface>().BuildNavMesh();
+        this.NavMesh.GetComponent<MeshRenderer>().enabled = false;
+    }
+
+    void GenerateScrapers()
     {
         if (this.BuildingPrefabs.Length == 0)
         {

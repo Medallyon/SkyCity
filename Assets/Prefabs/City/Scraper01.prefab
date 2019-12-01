@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 980275732410838134}
   - component: {fileID: 2666307259315266131}
   - component: {fileID: 5577798576932777156}
+  - component: {fileID: -564116050436629346}
   m_Layer: 0
   m_Name: Scraper01
   m_TagString: Untagged
@@ -108,3 +109,19 @@ MonoBehaviour:
   minimum: -15
   maximum: 15
   Speed: 0.25
+--- !u!208 &-564116050436629346
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8124789972319162595}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 2.7500002, y: 6.3, z: 2.7500002}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 0
+  m_Center: {x: -2.7500002, y: 8.3, z: -2.7500002}
+  m_TimeToStationary: 0.5
