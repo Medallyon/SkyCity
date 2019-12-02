@@ -5,19 +5,39 @@ using UnityEngine.AI;
 
 public class CityGenerator : MonoBehaviour
 {
+    [Header("City Generation")]
     public GameObject[] BuildingPrefabs;
     public Vector2 CityConstraints = new Vector2(10, 10);
     public float Padding = 20f;
 
-    public GameObject NavMesh;
+    public GameObject Surface;
+
+    [Header("Floating Scrapers")]
+    [Tooltip("The number of groups that should be created. Each group has synchronised floating for performance reasons.")]
+    public int FloatingGroups = 5;
+    private List<GameObject> groups = new List<GameObject>();
+
+    [Header("Enemy Generation")]
+    public int EnemiesToSpawn = 5;
+    public GameObject[] EnemyPrefabs;
+    private List<GameObject> enemies = new List<GameObject>();
 
     // Start is called before the first frame update
     void Start()
     {
-        GenerateScrapers();
+        for (int i = 0; i < this.FloatingGroups; i++)
+        {
+            this.groups.Add(new GameObject($"Scraper Group {i}"));
+            this.groups[i].AddComponent<FloatingScraper>().Speed = .25f;
+        }
+        
+        this.GenerateScrapers();
+        this.GeneratePatrolGrid();
 
-        this.NavMesh.GetComponent<NavMeshSurface>().BuildNavMesh();
-        this.NavMesh.GetComponent<MeshRenderer>().enabled = false;
+        //this.NavMesh.GetComponent<NavMeshSurface>().BuildNavMesh();
+        this.Surface.GetComponent<MeshRenderer>().enabled = false;
+
+        this.SpawnEnemies();
     }
 
     void GenerateScrapers()
@@ -40,8 +60,49 @@ public class CityGenerator : MonoBehaviour
                 if (i == this.CityConstraints.x / 2 && j == this.CityConstraints.y / 2)
                     continue;
 
-                Instantiate(this.BuildingPrefabs[Random.Range(0, this.BuildingPrefabs.Length)], spawnPosition, new Quaternion());
+                GameObject scraperGroup = this.groups[Random.Range(0, this.groups.Count)];
+                GameObject scraper = Instantiate(this.BuildingPrefabs[Random.Range(0, this.BuildingPrefabs.Length)], spawnPosition, new Quaternion());
+
+                scraper.transform.parent = scraperGroup.transform;
             }
         }
+    }
+
+    void GeneratePatrolGrid()
+    {
+        int width = (int)this.CityConstraints.x + 1;
+        int height = (int)this.CityConstraints.y + 1;
+        float halfPad = this.Padding / 2;
+
+        Vector3 startingPosition = this.transform.position + new Vector3(halfPad * width - halfPad / 2, 100, halfPad * height - halfPad / 2);
+        for (int i = 0; i < width; i++)
+        {
+            for (int j = 0; j < height; j++)
+            {
+                Vector3 patrolPos = startingPosition - new Vector3(this.Padding * i, 0, this.Padding * j);
+                AIMovement.PatrolPoints.Add(patrolPos);
+            }
+        }
+    }
+
+    void SpawnEnemies()
+    {
+        for (int i = 0; i < this.EnemiesToSpawn; i++)
+            this.SpawnEnemy(AIMovement.RandomPatrolPoint);
+    }
+
+    void SpawnEnemy(Vector3 target)
+    {
+        GameObject enemy = Instantiate(this.EnemyPrefabs[Random.Range(0, this.EnemyPrefabs.Length)], target, new Quaternion());
+        enemy.GetComponent<AIMovement>().NavMesh = this.Surface.GetComponent<NavMeshSurface>();
+
+        NavMeshHit navHit;
+        if (NavMesh.SamplePosition(target, out navHit, 500, -1))
+        {
+            enemy.transform.position = navHit.position;
+            enemy.GetComponent<AIMovement>().ImplementNavMeshAgent();
+        }
+
+        this.enemies.Add(enemy);
     }
 }

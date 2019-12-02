@@ -30,6 +30,7 @@ public class FloatingScraper : MonoBehaviour
         this.transform.position += new Vector3(0, this.transform.position.y + MapRangeClamped(0, 1, this.minimum, this.maximum, this.t), 0);
     }
 
+    // Quite performance-heavy if called on hundreds of objects
     void Update()
     {
         // animate the position of the game object...

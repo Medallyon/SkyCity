@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8124789972319162595
+--- !u!1 &917205457003040659
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,47 +8,47 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 9149275772359349333}
-  - component: {fileID: 8410473802723868806}
-  - component: {fileID: 980275732410838134}
-  - component: {fileID: 2666307259315266131}
-  - component: {fileID: -564116050436629346}
+  - component: {fileID: 4242892604328492416}
+  - component: {fileID: 5168671014228232118}
+  - component: {fileID: 1478948195855072079}
+  - component: {fileID: 9195080050120595100}
+  - component: {fileID: 2998232200191147216}
   m_Layer: 0
-  m_Name: Scraper01
-  m_TagString: Scraper
+  m_Name: Enemy1
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &9149275772359349333
+--- !u!4 &4242892604328492416
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8124789972319162595}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -64.9, y: 60.684566, z: -2.8507185}
-  m_LocalScale: {x: 15, y: 15, z: 15}
+  m_GameObject: {fileID: 917205457003040659}
+  m_LocalRotation: {x: 0.00000008146034, y: 0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 5, y: 5, z: 5}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &8410473802723868806
+--- !u!33 &5168671014228232118
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8124789972319162595}
-  m_Mesh: {fileID: -2432090755550338912, guid: f9a545f2c35b2184b967541dfab39241, type: 3}
---- !u!23 &980275732410838134
+  m_GameObject: {fileID: 917205457003040659}
+  m_Mesh: {fileID: 512672024619533229, guid: c40e43573b219a14ab7c325b3c6ea37f, type: 3}
+--- !u!23 &1478948195855072079
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8124789972319162595}
+  m_GameObject: {fileID: 917205457003040659}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -59,7 +59,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 32b9b94c3a7e9f64f86d1880df9f8852, type: 2}
+  - {fileID: 2100000, guid: 75a7f31be76184f46b0a909b40ee5d4c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -79,33 +79,38 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &2666307259315266131
-MeshCollider:
+--- !u!195 &9195080050120595100
+NavMeshAgent:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8124789972319162595}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_GameObject: {fileID: 917205457003040659}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: -2432090755550338912, guid: f9a545f2c35b2184b967541dfab39241, type: 3}
---- !u!208 &-564116050436629346
-NavMeshObstacle:
+  m_AgentTypeID: 0
+  m_Radius: 3.97
+  m_Speed: 10
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 150
+  m_StoppingDistance: 12
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2.11
+  m_BaseOffset: 1.17
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 3
+--- !u!114 &2998232200191147216
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8124789972319162595}
+  m_GameObject: {fileID: 917205457003040659}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 2.7500002, y: 6.3, z: 2.7500002}
-  m_MoveThreshold: 0.1
-  m_Carve: 1
-  m_CarveOnlyStationary: 0
-  m_Center: {x: -2.7500002, y: 8.3, z: -2.7500002}
-  m_TimeToStationary: 0.5
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ae5319de901dea489cc45d5d4d68d32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NavMesh: {fileID: 0}
