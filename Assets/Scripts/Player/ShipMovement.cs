@@ -14,21 +14,20 @@ public class ShipMovement : MonoBehaviour
     private Vector3 direction;
     private Vector3 eulerRotation = new Vector3();
    
-    // Start is called before the first frame update
     void Start()
     {
         this.acceleration = this.Speed;
         this.rb = this.GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         // Forward / Backward
         this.direction = this.transform.forward * Input.GetAxis("ForwardMovement");
         // Port / Starboard
         this.direction += this.transform.right * Input.GetAxis("SideMovement");
-        this.direction.y = 0;
+        // Ascension / Descension
+        this.direction += this.transform.up * Input.GetAxis("VerticalMovement");
 
         // Boost the movement speed up to the Top Speed
         if (Input.GetButton("Boost"))
