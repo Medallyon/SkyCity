@@ -6,6 +6,7 @@ using UnityEngine;
 public class ProjectileMovement : MonoBehaviour
 {
     public float Speed = 100f;
+    public float Damage = 1f;
     public float DestroyAfter = 10f;
 
     private Rigidbody rb;
@@ -14,6 +15,8 @@ public class ProjectileMovement : MonoBehaviour
     void Start()
     {
         this.rb = this.GetComponent<Rigidbody>();
+        this.rb.velocity = this.Speed * this.transform.up;
+        
         if (this.DestroyAfter > 0f)
             Invoke("DestroyTimer_Elapsed", this.DestroyAfter);
     }
@@ -21,11 +24,24 @@ public class ProjectileMovement : MonoBehaviour
     public void DestroyTimer_Elapsed()
     {
         Destroy(this.gameObject);
+        CancelInvoke("DestroyTimer_Elapsed");
     }
 
-    // Update is called once per frame
-    void Update()
+    void OnCollisionEnter(Collision collision)
     {
-        this.rb.velocity = this.Speed * this.transform.up;
+        Debug.Log($"Collided with {collision.gameObject}");
+        foreach (ContactPoint contact in collision.contacts)
+            Debug.DrawRay(contact.point, contact.normal, Color.white);
+
+        // TODO: Play Laser Sound
+
+        GameObject other = collision.gameObject;
+        if (other.tag == "Player" || other.tag == "NavMesh")
+            return;
+
+        if (other.tag == "Enemy")
+            other.GetComponent<Enemy>().Health -= this.Damage;
+
+        this.DestroyTimer_Elapsed();
     }
 }

@@ -13,9 +13,11 @@ GameObject:
   - component: {fileID: 1478948195855072079}
   - component: {fileID: 9195080050120595100}
   - component: {fileID: 2998232200191147216}
+  - component: {fileID: 6962914741407695977}
+  - component: {fileID: -1403546070832061662}
   m_Layer: 0
   m_Name: Enemy1
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -114,3 +116,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NavMesh: {fileID: 0}
+--- !u!114 &6962914741407695977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 917205457003040659}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a381eb49b22cc4842830fedb408b6210, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  explosionSound: {fileID: 0}
+  MaxHealth: 10
+--- !u!65 &-1403546070832061662
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 917205457003040659}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.8711041, y: 2.0760422, z: 5.414069}
+  m_Center: {x: 0, y: -0.7639048, z: -1.0635946}

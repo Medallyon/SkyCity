@@ -19,7 +19,7 @@ public class ObjectiveHandler : MonoBehaviour
         this.EnemiesLeftText.text = this.enemiesToDefeat.ToString();
     }
 
-    private List<GameObject> defeated;
+    private List<GameObject> defeated = new List<GameObject>();
     public void defeatEnemy(GameObject enemy)
     {
         this.defeated.Add(enemy);

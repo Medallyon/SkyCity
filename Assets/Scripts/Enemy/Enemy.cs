@@ -4,17 +4,31 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public List<Mesh> Meshes;
+    public AudioSource explosionSound;
 
-    // Start is called before the first frame update
-    void Start()
+    public float MaxHealth = 10f;
+
+    private float health = 10f;
+    public float Health
     {
-        this.GetComponent<MeshFilter>().mesh = this.Meshes[Random.Range(0, this.Meshes.Count)];
+        get
+        {
+            return this.health;
+        }
+        set
+        {
+            this.health = Mathf.Max(0f, Mathf.Min(value, this.MaxHealth));
+            if (this.Health == 0f)
+                this.Destroy();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    void Destroy()
     {
-        
+        GameObject.Find("ObjectiveHandler").GetComponent<ObjectiveHandler>().defeatEnemy(this.gameObject);
+
+        //this.explosionSound.Play();
+        //Instantiate(new Explosion());
+        Destroy(this.gameObject);
     }
 }
