@@ -5,13 +5,27 @@ using UnityEngine.UI;
 
 public class ScaledMovement : MonoBehaviour
 {
+    static float MapRangeClamped(float from1, float to1, float from2, float to2, float value)
+    {
+        if (value <= from2)
+            return from1;
+        if (value >= to2)
+            return to1;
+        return (to1 - from1) * ((value - from2) / (to2 - from2)) + from1;
+    }
+
+    [Header("Movement")]
     public float Speed = 10f;
     public float TopSpeed = 80f;
+    [Tooltip("The amount you can boost before running out of charge")]
+    public float BoostCharge = 100f;
+    [Tooltip("The time it takes before being able to boost again after a boost (in seconds)")]
+    public float BoostCooldown = 1f;
 
     [Header("UI")]
-    public Slider Accelerometer;
     public Text AccelerationText;
-    public Image VelocityFill;
+    public Slider Accelerometer;
+    public Slider BoostMeter;
 
     private float acceleration = 0f;
     private float Acceleration
@@ -29,16 +43,49 @@ public class ScaledMovement : MonoBehaviour
         }
     }
 
+    private bool canRecharge = true;
+    private float boost = 0f;
+    public float Boost
+    {
+        get
+        {
+            return this.boost;
+        }
+        set
+        {
+            this.boost = Mathf.Max(0, Mathf.Min(value, this.BoostCharge));
+            this.BoostMeter.value = MapRangeClamped(0, 1, 0, this.BoostCharge, this.Boost);
+        }
+    }
+
     private Rigidbody rb;
     private Vector3 eulerRotation;
 
     void Start()
     {
         this.rb = this.GetComponent<Rigidbody>();
+        this.Boost = this.BoostCharge;
     }
 
     void FixedUpdate()
     {
+        if (Input.GetButton("Boost"))
+        {
+            this.canRecharge = false;
+            CancelInvoke("ResetBoost");
+
+            if (--this.Boost > 0)
+                this.rb.AddForce(this.transform.forward * this.Speed * 3);
+        }
+        
+        else
+        {
+            if (this.canRecharge)
+                this.Boost++;
+            else
+                Invoke("ResetBoost", this.BoostCooldown);
+        }
+
         if (!Input.GetButton("Brake"))
             // Increment acceleration steadily
             this.Acceleration += Input.GetAxis("ForwardMovement") * (this.Speed * .01f);
@@ -63,12 +110,8 @@ public class ScaledMovement : MonoBehaviour
         this.rb.MoveRotation(this.rb.rotation * deltaRotation);
     }
 
-    static float MapRangeClamped(float from1, float to1, float from2, float to2, float value)
+    void ResetBoost()
     {
-        if (value <= from2)
-            return from1;
-        if (value >= to2)
-            return to1;
-        return (to1 - from1) * ((value - from2) / (to2 - from2)) + from1;
+        this.canRecharge = true;
     }
 }
