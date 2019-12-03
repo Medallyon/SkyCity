@@ -25,9 +25,11 @@ public class FloatingScraper : MonoBehaviour
         this.minimum = this.transform.position.y + this.minimum;
         this.maximum = this.transform.position.y + this.maximum;
 
-        // Set a random alpha value for this object
+        // Set a random alpha value (starting point) for this object
         this.t = Random.value;
         this.transform.position += new Vector3(0, this.transform.position.y + MapRangeClamped(0, 1, this.minimum, this.maximum, this.t), 0);
+        if (Random.value > .5f)
+            this.SwapDirection();
     }
 
     // Quite performance-heavy if called on hundreds of objects
