@@ -10,6 +10,7 @@ public class ScaledMovement : MonoBehaviour
 
     [Header("UI")]
     public Slider Accelerometer;
+    public Text AccelerationText;
     public Image VelocityFill;
 
     private float acceleration = 0f;
@@ -24,6 +25,7 @@ public class ScaledMovement : MonoBehaviour
             // Limit acceleration with min and max bounds based on public TopSpeed
             this.acceleration = Mathf.Max(-this.TopSpeed / 2, Mathf.Min(value, this.TopSpeed));
             this.Accelerometer.value = MapRangeClamped(0, 1, -this.TopSpeed / 2, this.TopSpeed, this.Acceleration);
+            this.AccelerationText.text = $"{Mathf.Round(MapRangeClamped(-.5f, 1, -this.TopSpeed / 2, this.TopSpeed, this.Acceleration) * 100)}%";
         }
     }
 
@@ -35,21 +37,22 @@ public class ScaledMovement : MonoBehaviour
         this.rb = this.GetComponent<Rigidbody>();
     }
 
-    void Update()
-    {
-        // TODO: Reference slider fill image and sync it with the actual current velocity
-        //this.
-    }
-
     void FixedUpdate()
     {
-        this.Acceleration += Input.GetAxis("ForwardMovement") * (this.Speed * .01f);
-        if (Input.GetButton("Brake"))
-            this.Acceleration = 0f;
+        if (!Input.GetButton("Brake"))
+            // Increment acceleration steadily
+            this.Acceleration += Input.GetAxis("ForwardMovement") * (this.Speed * .01f);
+        else
+            // Lerp acceleration to 0 while holding brake
+            this.Acceleration = Mathf.Lerp(this.Acceleration, 0f, Time.deltaTime);
 
-        this.rb.AddForce(Input.GetAxis("SideMovement") * this.transform.right * this.Speed);
-        this.rb.AddForce(Input.GetAxis("VerticalMovement") * this.transform.up * this.Speed);
+        // Check before adding force to save calls to physics engine
+        if (Input.GetAxis("SideMovement") != 0f)
+            this.rb.AddForce(Input.GetAxis("SideMovement") * this.transform.right * this.Speed);
+        if (Input.GetAxis("VerticalMovement") != 0f)
+            this.rb.AddForce(Input.GetAxis("VerticalMovement") * this.transform.up * this.Speed);
 
+        // Lerp Velocity, making the object catch up with the speed of 'Acceleration'
         this.rb.velocity = Vector3.Lerp(this.rb.velocity, this.transform.forward * this.Acceleration, Time.deltaTime / 2);
 
         // Rotation Lerp
