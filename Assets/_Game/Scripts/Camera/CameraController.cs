@@ -26,7 +26,6 @@ public class CameraController : MonoBehaviour
     float x = 0f;
     float y = 0f;
 
-    // Start is called before the first frame update
     void Start()
     {
         Cursor.lockState = this.cursorMode;
@@ -46,6 +45,10 @@ public class CameraController : MonoBehaviour
     void LateUpdate()
     {
         if (!this.FollowTarget)
+            return;
+
+        var movement = this.FollowTarget.GetComponent<ScaledMovement>();
+        if (movement != null && movement.inputLocked)
             return;
 
         this.x += Input.GetAxis("Mouse X") * this.xSpeed * this.distance * 0.02f;

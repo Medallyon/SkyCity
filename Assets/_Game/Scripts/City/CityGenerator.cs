@@ -26,7 +26,6 @@ public class CityGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Starting City Generation");
         for (int i = 0; i < this.FloatingGroups; i++)
         {
             this.groups.Add(new GameObject($"Scraper Group {i}"));
@@ -46,7 +45,7 @@ public class CityGenerator : MonoBehaviour
     {
         if (this.BuildingPrefabs.Length == 0)
         {
-            Debug.Log("No building prefabs entered. Aborting City Generation");
+            Debug.LogWarning("No building prefabs entered. Aborting City Generation");
             return;
         }
 
@@ -63,7 +62,6 @@ public class CityGenerator : MonoBehaviour
                     continue;
 
                 GameObject scraperGroup = this.groups[Random.Range(0, this.groups.Count)];
-                Debug.Log($"Spawning Scraper at {spawnPosition}");
                 GameObject scraper = Instantiate(this.BuildingPrefabs[Random.Range(0, this.BuildingPrefabs.Length)], spawnPosition, new Quaternion());
 
                 scraper.transform.parent = scraperGroup.transform;

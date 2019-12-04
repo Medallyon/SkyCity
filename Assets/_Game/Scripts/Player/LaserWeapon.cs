@@ -52,6 +52,10 @@ public class LaserWeapon : MonoBehaviour
         if (!Input.GetButton("Shoot") || this.onCooldown)
             return;
 
+        var movement = GameObject.FindGameObjectWithTag("Player").GetComponent<ScaledMovement>();
+        if (movement != null && movement.inputLocked)
+            return;
+
         this.onCooldown = true;
         if (this.DoubleLasers)
             this.shotLeft = !this.shotLeft;

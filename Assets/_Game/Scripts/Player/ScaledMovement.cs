@@ -60,6 +60,8 @@ public class ScaledMovement : MonoBehaviour
 
     private Rigidbody rb;
     private Vector3 eulerRotation;
+    public bool inputLocked = false;
+    private Vector3 previousVelocity = Vector3.zero;
 
     void Start()
     {
@@ -69,9 +71,12 @@ public class ScaledMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (this.inputLocked)
+            return;
+
         if (Input.GetButton("Boost"))
         {
-            this.canRecharge = false;
+            this.ResetBoost();
             CancelInvoke("ResetBoost");
 
             if (--this.Boost > 0)
@@ -118,5 +123,19 @@ public class ScaledMovement : MonoBehaviour
     void ResetBoost()
     {
         this.canRecharge = true;
+    }
+
+    public void OnPauseGame()
+    {
+        this.inputLocked = true;
+        this.previousVelocity = this.rb.velocity;
+        this.rb.velocity = Vector3.zero;
+    }
+
+    public void OnUnpauseGame()
+    {
+        this.inputLocked = false;
+        this.rb.velocity = this.previousVelocity;
+        this.previousVelocity = Vector3.zero;
     }
 }
