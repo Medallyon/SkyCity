@@ -40,12 +40,11 @@ public class PauseMenu : MonoBehaviour
     {
         this.paused = !this.paused;
 
-        Debug.Log($"Paused: {this.paused}");
-
         this.player.SendMessage(this.paused ? "OnPauseGame" : "OnUnpauseGame");
 
         Cursor.lockState = this.paused ? CursorLockMode.None : CursorLockMode.Locked;
         Cursor.visible = this.paused;
+
         this.PauseScreen.SetActive(this.paused);
         this.Instructions.SetActive(false);
     }
