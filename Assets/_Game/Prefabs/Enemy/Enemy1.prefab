@@ -128,10 +128,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a381eb49b22cc4842830fedb408b6210, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HitPrefab: {fileID: 27069364427171827, guid: 77076637de7c4cf41ab2b65a4c91b091, type: 3}
-  ExplosionPrefab: {fileID: 1685874166552172, guid: 2dc5347a44240ea4597cafb2d1d7c160,
+  ExplosionPrefab: {fileID: 3570287359782890679, guid: eb59aea51b02c1d40969621435046a65,
     type: 3}
-  explosionSound: {fileID: 0}
   MaxHealth: 15
 --- !u!65 &-1403546070832061662
 BoxCollider:

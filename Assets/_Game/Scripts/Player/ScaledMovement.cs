@@ -27,6 +27,10 @@ public class ScaledMovement : MonoBehaviour
     public Slider Accelerometer;
     public Slider BoostMeter;
 
+    [Header("Audio")]
+    public AudioClip BoostSound;
+    private AudioSource boostSource;
+
     private float acceleration = 0f;
     private float Acceleration
     {
@@ -43,6 +47,7 @@ public class ScaledMovement : MonoBehaviour
         }
     }
 
+    private bool boosting = false;
     private bool canRecharge = true;
     private float boost = 0f;
     public float Boost
@@ -62,11 +67,22 @@ public class ScaledMovement : MonoBehaviour
     private Vector3 eulerRotation;
     public bool inputLocked = false;
     private Vector3 previousVelocity = Vector3.zero;
+    private AudioSource engineWhirring;
 
     void Start()
     {
         this.rb = this.GetComponent<Rigidbody>();
         this.Boost = this.BoostCharge;
+
+        this.engineWhirring = this.GetComponent<AudioSource>();
+        this.engineWhirring.pitch = .5f;
+
+        this.boostSource = this.GetComponents<AudioSource>()[2];
+    }
+
+    void Update()
+    {
+        this.engineWhirring.pitch = MapRangeClamped(-.5f, 1.6f, -this.TopSpeed / 2, this.TopSpeed, this.Acceleration) * (this.Acceleration < 0 ? -1 : 1);
     }
 
     void FixedUpdate()
@@ -74,22 +90,10 @@ public class ScaledMovement : MonoBehaviour
         if (this.inputLocked)
             return;
 
-        if (Input.GetButton("Boost"))
-        {
-            this.ResetBoost();
-            CancelInvoke("ResetBoost");
-
-            if (--this.Boost > 0)
-                this.rb.AddForce(this.transform.forward * this.Speed * 3);
-        }
-        
-        else
-        {
-            if (this.canRecharge)
-                this.Boost++;
-            else
-                Invoke("ResetBoost", this.BoostCooldown);
-        }
+        if ((this.BoostCharge == this.Boost && Input.GetButtonDown("Boost")) || this.boosting)
+            this.DoBoost();
+        else if (this.canRecharge)
+            this.Boost++;
 
         if (!Input.GetButton("Brake"))
             // Increment acceleration steadily
@@ -120,8 +124,26 @@ public class ScaledMovement : MonoBehaviour
         this.rb.MoveRotation(this.rb.rotation * deltaRotation);
     }
 
+    void DoBoost()
+    {
+        this.canRecharge = false;
+
+        Debug.Log($"{this.boosting}");
+        if (!this.boosting)
+            this.boostSource.PlayOneShot(this.BoostSound);
+        
+        Debug.Log("Boosting");
+        this.boosting = true;
+
+        if (--this.Boost > 0)
+            this.rb.AddForce(this.transform.forward * this.Speed * 3);
+        else
+            Invoke("ResetBoost", this.BoostCooldown);
+    }
+
     void ResetBoost()
     {
+        this.boosting = false;
         this.canRecharge = true;
     }
 

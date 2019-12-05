@@ -5,6 +5,7 @@ using UnityEngine;
 public class LaserWeapon : MonoBehaviour
 {
     public List<GameObject> LaserPrefabs = new List<GameObject>();
+    public List<AudioClip> ShootingSounds = new List<AudioClip>();
 
     [Header("Behaviour")]
     [Tooltip("How often the laser shoots, in seconds")]
@@ -24,9 +25,13 @@ public class LaserWeapon : MonoBehaviour
     private bool onCooldown = false;
     private bool shotLeft = false;
 
+    private AudioSource laserSource;
+
     // Start is called before the first frame update
     void Start()
     {
+        this.laserSource = this.GetComponents<AudioSource>()[1];
+
         if (this.DoubleLasers)
         {
             this.LeftAnchor = Instantiate(new GameObject("Left Laser"), this.transform.position + new Vector3(2.84f, 0.58f, 1.382f), new Quaternion(), this.transform);
@@ -65,6 +70,9 @@ public class LaserWeapon : MonoBehaviour
 
     GameObject Shoot()
     {
+        this.laserSource.clip = this.ShootingSounds[Random.Range(0, this.ShootingSounds.Count)];
+        this.laserSource.Play();
+
         GameObject spawnAnchor = this.DefaultAnchor;
         if (this.DoubleLasers)
             spawnAnchor = (this.shotLeft) ? this.RightAnchor : this.LeftAnchor;

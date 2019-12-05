@@ -5,7 +5,6 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public GameObject ExplosionPrefab;
-    public AudioSource explosionSound;
 
     public float MaxHealth = 10f;
 
@@ -26,11 +25,10 @@ public class Enemy : MonoBehaviour
 
     void Destroy()
     {
-        GameObject.Find("ObjectiveHandler").GetComponent<ObjectiveHandler>().defeatEnemy(this.gameObject);
+        GameObject.Find("Game").GetComponent<ObjectiveHandler>().defeatEnemy(this.gameObject);
 
-        // todo: explosion doesn't play / get instantiated
-        Instantiate(this.ExplosionPrefab, this.transform);
-        //this.explosionSound.Play();
+        GameObject explosion = Instantiate(this.ExplosionPrefab);
+        explosion.transform.position = this.transform.position;
 
         Destroy(this.gameObject);
     }

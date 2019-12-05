@@ -1299,24 +1299,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1746030766}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &554912596
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 554912595}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a076bd01989f9004db882a2f49284b6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  LaserPrefabs:
-  - {fileID: 7015065819921680981, guid: 0164e7fc48d77364d991ac7696239790, type: 3}
-  Cooldown: 0.5
-  YOffset: 0
-  DoubleLasers: 1
-  DoubleLaserOffset: 2
 --- !u!4 &554912602 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4891293108272027185, guid: a84e32077ab6f264ea018f92b3fde8bd,
@@ -2233,6 +2215,7 @@ GameObject:
   - component: {fileID: 971136424}
   - component: {fileID: 971136423}
   - component: {fileID: 971136425}
+  - component: {fileID: 971136426}
   m_Layer: 0
   m_Name: Game
   m_TagString: Untagged
@@ -2283,6 +2266,102 @@ MonoBehaviour:
   EnemiesLeftText: {fileID: 1284190307}
   MenuButton: {fileID: 10887408}
   QuitButton: {fileID: 1863903653}
+--- !u!82 &971136426
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 971136422}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 920f7d50319dba2428ef01a9c56052f8, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.397
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &986383674
 GameObject:
   m_ObjectHideFlags: 0
@@ -3858,11 +3937,6 @@ PrefabInstance:
       propertyPath: m_StaticEditorFlags
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 6937127364342873285, guid: a84e32077ab6f264ea018f92b3fde8bd,
-        type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
     - target: {fileID: 4891293108272027185, guid: a84e32077ab6f264ea018f92b3fde8bd,
         type: 3}
       propertyPath: m_RootOrder
@@ -3900,14 +3974,14 @@ PrefabInstance:
       objectReference: {fileID: 1613847851}
     - target: {fileID: 150905627119992918, guid: a84e32077ab6f264ea018f92b3fde8bd,
         type: 3}
-      propertyPath: BoostCharge
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 150905627119992918, guid: a84e32077ab6f264ea018f92b3fde8bd,
-        type: 3}
       propertyPath: BoostMeter
       value: 
       objectReference: {fileID: 730776879}
+    - target: {fileID: 150905627119992918, guid: a84e32077ab6f264ea018f92b3fde8bd,
+        type: 3}
+      propertyPath: BoostSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 32789371461d8d047b06ee0c96970871, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a84e32077ab6f264ea018f92b3fde8bd, type: 3}
 --- !u!1 &1790890718
@@ -4064,7 +4138,7 @@ MonoBehaviour:
   CityConstraints: {x: 16, y: 16}
   Padding: 175
   Surface: {fileID: 797274470}
-  FloatingGroups: 5
+  FloatingGroups: 10
   EnemiesToSpawn: 5
   EnemyPrefabs:
   - {fileID: 917205457003040659, guid: b77b190e33500c342a3b1a5ffd6dc1fc, type: 3}

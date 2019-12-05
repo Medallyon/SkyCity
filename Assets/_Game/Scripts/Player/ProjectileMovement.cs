@@ -43,7 +43,8 @@ public class ProjectileMovement : MonoBehaviour
         if (other.tag == "Enemy")
             other.GetComponent<Enemy>().Health -= this.Damage;
 
-        Instantiate(this.HitPrefab, this.transform);
+        GameObject hit = Instantiate(this.HitPrefab);
+        hit.transform.position = this.transform.position;
 
         this.DestroyTimer_Elapsed();
     }

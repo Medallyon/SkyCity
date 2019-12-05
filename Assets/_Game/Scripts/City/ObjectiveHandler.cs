@@ -36,6 +36,9 @@ public class ObjectiveHandler : MonoBehaviour
         {
             GameObject.FindGameObjectWithTag("Player").SendMessage("OnPauseGame");
             this.ScoreScreen.SetActive(true);
+
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
         }
     }
 
