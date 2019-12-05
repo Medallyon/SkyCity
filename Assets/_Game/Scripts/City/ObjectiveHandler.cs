@@ -10,6 +10,7 @@ public class ObjectiveHandler : MonoBehaviour
     public GameObject ScoreScreen;
 
     [Header("UI")]
+    public Text TimerText;
     public Text EnemiesLeftText;
     public Button MenuButton;
     public Button QuitButton;
@@ -23,6 +24,11 @@ public class ObjectiveHandler : MonoBehaviour
 
         this.MenuButton.onClick.AddListener(this.GoToMenu);
         this.QuitButton.onClick.AddListener(this.QuitGame);
+    }
+
+    void Update()
+    {
+        this.TimerText.text = $"{Mathf.Floor(Time.time / 60).ToString("00")}:{Mathf.RoundToInt(Time.time % 60).ToString("00")}";
     }
 
     private List<GameObject> defeated = new List<GameObject>();
